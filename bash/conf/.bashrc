@@ -140,7 +140,8 @@ fi
 
 # configure less settings
 # https://relentlesscoding.com/posts/make-less-options-permanent-or-the-missing-lessrc/
-export LESS="--mouse IFRSX"
+export LESS="--mouse IFRSX" # add mouse support
+export LESSHISTFILE='-' # remove history file
 
 # disable less history
 export LESSHISTFILE="-"
