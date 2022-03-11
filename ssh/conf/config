@@ -1,0 +1,22 @@
+#          _
+#  ___ ___| |__
+# / __/ __| '_ \
+# \__ \__ \ | | |
+# |___/___/_| |_|
+
+# host aliases for ssh
+
+Host workstation
+    User mwpolito
+    Port 22
+    Hostname 192.168.1.139
+Host home
+    User mwpolito
+    Port 22
+    Hostname 192.168.1.4
+Host git
+    User mwpolito
+    Port 22
+    Hostname 192.168.1.9
+Host raspi
+    Hostname 192.168.1.15

@@ -1,0 +1,50 @@
+[user]
+	email = "mwpolito1@gmail.com"
+	name = "Mickey Polito"
+[ui "color"]
+    ui = always
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+[core]
+    autocrlf = input
+    safecrlf = true
+	editor = vim
+	pager = less
+[merge]
+    tool = vimdiff
+[alias]
+    c = commit
+    s = status
+    st = status
+    lg = log --oneline
+    last = log -1 HEAD
+    cl = log -p -- ':(exclude)Cargo.lock'
+    f = push --force-with-lease
+    pom = push origin master
+[pull]
+    ff = only
+[push]
+    default = simple
+[help]
+    autocorrect = 1
+[url "git@github.com"]
+    insteadOf = gh:
+[github]
+    user = totallyReal123
+[apply]
+    whitespace = nowarn
+[mergetool]
+    keepBackup = false
+[difftool]
+    prompt = false
+[diff]
+	tool = vim
+    algorithm = patience
+    compactionHeuristic = true
+[push]
+    default = simple
+[init]
+	defaultBranch = master

@@ -1,0 +1,14 @@
+#  _           _
+# | |__   __ _| |_
+# | '_ \ / _` | __|
+# | |_) | (_| | |_
+# |_.__/ \__,_|\__|
+
+# set force color
+--color=always
+
+# set the theme to gruvbox
+--theme gruvbox-dark
+
+# no line numbers
+-p
