@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+#      _
+#  ___| |_ __
+# / -_)  _/ _|_
+# \___|\__\__(_)
+#
+# etc. environment variables - typically for shared use
+
+# set default editor
+if [ -n "$(command -v vim)" ]; then
+    export EDITOR='vim'
+else
+    export EDITOR='vi'
+fi
+
+# configure pager settings with less as a
+# fallback if bat doesn't exist
+if [ -z "$(command -v bat)" ]; then
+    alias bat='less'
+    export PAGER='less'
+else
+    export PAGER='bat'
+fi
+
+# prefer exa to tree if installed
+if [ -n "$(command -v exa)" ]; then
+    alias tree='exa --color=always -T'
+fi
+
+#     _
+#  __| |_____ __
+# / _` / -_) V /
+# \__,_\___|\_/
+#
+# environment variables for development
+
+# include rustup env file if installed
+if [ -f ~/.cargo/bin/rustup ]; then
+    . "$HOME/.cargo/env"
+fi
+
+# automatic JAVA_HOME variable evaluation
+if [ -n "$(command -v java)" ]; then
+    JAVA_HOME="$(realpath "$(dirname "$(realpath "$(which java)")")""/..")"
+    export JAVA_HOME
+fi
+
+#               __
+#  __ ___ _ _  / _|
+# / _/ _ \ ' \|  _|
+# \__\___/_||_|_|
+#
+# environment variables for program configuration
+
+# configuration variables for bash itself - see bash(1) for more options
+
+# don't put duplicate lines or space lines in the history
+HISTCONTROL=ignoreboth 
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# how long the ~/.bash_history file can be
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# enable programmable completion features
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# configurations for the standard pager less - see less(1) for more options
+
+# https://relentlesscoding.com/posts/make-less-options-permanent-or-the-missing-lessrc/
+export LESS="--mouse IFRSX" # add mouse support
+export LESSHISTFILE='-' # remove history file
