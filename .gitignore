@@ -1,5 +1,2 @@
 # ignore cache files created by ddm
 .created_*
-
-# ignore ddm binary if it exists
-ddm
