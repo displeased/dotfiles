@@ -7,8 +7,9 @@ Host gitl
 Host minel
     Hostname 192.168.1.11
 
+Host raspil
+    Hostname 192.168.1.15
+
 Host workstationl
     Hostname 192.168.1.139
 
-Host raspil
-    Hostname 192.168.1.15
