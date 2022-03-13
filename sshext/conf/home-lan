@@ -1,0 +1,14 @@
+Host homel
+    Hostname 192.168.1.4
+
+Host gitl
+    Hostname 192.168.1.9
+
+Host minel
+    Hostname 192.168.1.11
+
+Host workstationl
+    Hostname 192.168.1.139
+
+Host raspil
+    Hostname 192.168.1.15
