@@ -1,0 +1,3 @@
+[submodule ".ddm"]
+	path = .ddm
+	url = git@github.com:displeased/ddm.git
