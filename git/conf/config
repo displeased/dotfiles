@@ -24,6 +24,7 @@
     cl = log -p -- ':(exclude)Cargo.lock'
     f = push --force-with-lease
     pom = push origin master
+    dc = diff --cached
 [pull]
     ff = only
 [push]
