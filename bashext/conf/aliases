@@ -34,6 +34,11 @@ alias sl=ls
 #
 # novel combinations of already-existing command for added functionality
 
+# asusctl commands
+alias pmode='asusctl profile -P Performance'
+alias bmode='asusctl profile -P Balanced'
+alias qmode='asusctl profile -P Quiet'
+
 # clears screen and lists current dir
 alias cls='clear && echo "${PS1@P}""ls" && ls'
 alias cla='clear && echo "${PS1@P}""ls" && ls -A'

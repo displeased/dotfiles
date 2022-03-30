@@ -12,6 +12,14 @@ if [ -f ~/.cargo/bin/rustup ]; then
     . "$HOME/.cargo/env"
 fi
 
+# include go bin directory if it exists
+if [ -n "$(command -v go)" ]; then
+    GOPATH="$(go env GOPATH)"
+    PATH="$GOPATH/bin:$PATH"
+    export GOPATH
+    export PATH
+fi
+
 # automatic JAVA_HOME variable evaluation
 if [ -n "$(command -v java)" ]; then
     JAVA_HOME="$(realpath "$(dirname "$(realpath "$(which java)")")""/..")"
@@ -39,6 +47,13 @@ if [ -z "$(command -v bat)" ]; then
     export PAGER='less'
 else
     export PAGER='bat'
+fi
+
+# set default web browser to firefox
+if [ -n "$(command -v firefox)" ]; then
+    export BROWSER='firefox'
+else
+    export BROWSER='lynx'
 fi
 
 # prefer exa to tree if installed
