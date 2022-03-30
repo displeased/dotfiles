@@ -28,8 +28,8 @@ Plugin 'VundleVim/Vundle.vim'
 " more info: https://editorconfig.org/
 Plugin 'editorconfig/editorconfig-vim'
 
-" gruvbox theme plugin
-Plugin 'morhetz/gruvbox'
+" ayu theme plugin
+Plugin 'ayu-theme/ayu-vim'
 
 " latex integration plugin
 Plugin 'lervag/vimtex'
@@ -51,12 +51,16 @@ Plugin 'tfnico/vim-gradle'
 " toml plugin
 Plugin 'cespare/vim-toml'
 
+" yaml plugin
+Plugin 'mrk21/yaml-vim'
+
 " file tree plugin
 Plugin 'preservim/nerdtree'
 
 " lsp testing
 "Plugin 'prabirshrestha/vim-lsp'
 "Plugin 'mattn/vim-lsp-settings'
+"Plugin 'vim-syntastic/syntastic'
 
 "           _
 "  ___ _ __| |_
@@ -64,26 +68,47 @@ Plugin 'preservim/nerdtree'
 " \___/ .__/\__|
 "     |_|
 
+" syntastic defaults
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" syntastic settings
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
 " turn on built-in syntax highlighting
 syntax on
 
 " disable sound in Windows Terminal
 set belloff=all
 
-" setup gruvbox theme by:
-" - setting to 256 colors
-" - setting the theme
-" - setting it dark
+" setup ayu theme by
+" - setting term to 256 colors
+" - setting true color support 
+" - setting the colorscheme to ayu
+" - setting the flavor of ayu to mriage
 set t_Co=256
-colo gruvbox
+set termguicolors
+
+colorscheme ayu
+let ayucolor="dark"
 set background=dark
 
-" tmux
+" tmux reccomended settings
 set ft=tmux tw=0 nowrap
 
 " turn on mouse integration
 " https://www.varstack.com/2015/06/30/Mouse-with-vim/
+" https://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux#550482
 set mouse=a
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 " converts tabs to spaces
 set expandtab
