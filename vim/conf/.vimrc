@@ -6,6 +6,9 @@
 "
 " poorly put together configuration file for vim
 
+" to be safe 
+"set nocompatible
+"filetype off
 
 "      _               _
 " __ _(_)_ __ ___ _ __| |_  _ __ _
@@ -37,31 +40,32 @@ Plug 'morhetz/gruvbox'
 " time-based theme changes
 Plug 'jonstoler/werewolf.vim'
 
-" latex integration plugin
-Plug 'lervag/vimtex'
-
-" official rust plugin
-Plug 'rust-lang/rust.vim'
-
 " status bar plugin
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" file tree plugin
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+
+"############### Syntax/Lang Plugins ###############"
+
 " markdown plugin
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 " groovy lang plugin
-" for making build.gradle
-Plug 'tfnico/vim-gradle'
+Plug 'tfnico/vim-gradle', { 'for': 'gradle' }
+
+" rust lang plugin
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " toml plugin
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml', { 'for': 'toml' }
 
 " yaml plugin
-Plug 'mrk21/yaml-vim'
+Plug 'mrk21/yaml-vim', { 'for': 'yaml' }
 
-" file tree plugin
-Plug 'preservim/nerdtree'
+" latex integration plugin
+Plug 'lervag/vimtex', { 'for': 'tex' }
 
 " lsp testing
 "Plug 'prabirshrestha/vim-lsp'
@@ -99,9 +103,6 @@ let g:werewolf_day_start = 7
 let g:werewolf_day_end = 20
 
 "############### VIM CONF ###############" 
-
-" to be safe 
-set nocompatible
 
 " turn on built-in syntax highlighting
 syntax on
