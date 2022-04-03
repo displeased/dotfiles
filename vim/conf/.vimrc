@@ -6,16 +6,14 @@
 "
 " poorly put together configuration file for vim
 
-" to be safe 
-"set nocompatible
-"filetype off
+set nocompatible "to be safe
 
 "      _               _
 " __ _(_)_ __ ___ _ __| |_  _ __ _
 " \ V / | '  \___| '_ \ | || / _` |
 "  \_/|_|_|_|_|  | .__/_|\_,_\__, |
 "                |_|         |___/
-"
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -28,7 +26,10 @@ endif
 " | .__/_|\_,_\__, |_|_||_/__/
 " |_|         |___/
 
-call plug#begin()
+call plug#begin() "begin plugin declarations
+
+" some sensible defaults
+Plug 'tpope/vim-sensible'
 
 " editorconfig plugin
 Plug 'editorconfig/editorconfig-vim'
@@ -38,14 +39,18 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox'
 
 " time-based theme changes
-Plug 'jonstoler/werewolf.vim'
+Plug 'displeased/vim-circadian'
 
 " status bar plugin
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'enricobacis/vim-airline-clock'
 
 " file tree plugin
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" lsp testing
+"Plug 'vim-syntastic/syntastic'
 
 "############### Syntax/Lang Plugins ###############"
 
@@ -67,12 +72,7 @@ Plug 'mrk21/yaml-vim', { 'for': 'yaml' }
 " latex integration plugin
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
-" lsp testing
-"Plug 'prabirshrestha/vim-lsp'
-"Plug 'mattn/vim-lsp-settings'
-"Plug 'vim-syntastic/syntastic'
-
-call plug#end()
+call plug#end() "end plugin declarations
 
 "           _
 "  ___ _ __| |_
@@ -80,31 +80,10 @@ call plug#end()
 " \___/ .__/\__|
 "     |_|
 
-"############### SYNTASTIC ###############" 
-
-" syntastic defaults
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-" syntastic settings
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-
-"############### WEREWOLF ###############" 
-let g:werewolf_day_themes = ['gruvbox']
-let g:werewolf_night_themes = ['ayu']
-
-" default 8, use 24 hour format
-let g:werewolf_day_start = 7
-" default 20, 24 hour format
-let g:werewolf_day_end = 20
-
 "############### VIM CONF ###############" 
 
-" turn on built-in syntax highlighting
+" turn on indentation + syntax highlighting
+filetype plugin indent on
 syntax on
 
 " disable sound in Windows Terminal
@@ -115,15 +94,17 @@ set t_Co=256
 " set true color support
 set termguicolors
 
+" configure default theme 
 colorscheme gruvbox 
-let ayucolor="dark"
 set background=dark
+
+" set ayu dark
+let ayucolor="mirage"
 
 " tmux reccomended settings
 set ft=tmux tw=0 nowrap
 
 " turn on mouse integration
-" https://www.varstack.com/2015/06/30/Mouse-with-vim/
 " https://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux#550482
 set mouse=a
 if has("mouse_sgr")
@@ -147,14 +128,40 @@ set textwidth=0
 " set highlighting on search
 set hlsearch
 
-" keybind ctrl+n to turn off search highlighting
-nmap <C-N> :nohlsearch
-
-" open NERDTree on open
-"autocmd VimEnter * NERDTree
-
 " close NERDTree on last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
       \ && b:NERDTree.isTabTree()) | q | endif
 
-filetype plugin indent on
+"############### FILETYPE ###############" 
+
+" set workwrap for git commit messages to 72 
+au FileType gitcommit setlocal tw=72
+
+"############### KEYBINDS ###############" 
+
+" keybind ctrl+n to turn off search highlighting
+nmap <C-N> :nohlsearch
+
+"############### SYNTASTIC ###############" 
+
+" syntastic defaults
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" syntastic settings
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+"############### CIRCADIAN ###############" 
+
+let g:circadian_day_start = 7
+let g:circadian_night_start = 20
+
+let g:circadian_day_theme = 'ayu'
+let g:circadian_night_theme = 'ayu'
+
+let g:circadian_day_cmds = "let g:ayucolor='mirage'"
+let g:circadian_night_cmds= "let g:ayucolor='dark'"
