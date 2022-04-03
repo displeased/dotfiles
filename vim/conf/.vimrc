@@ -6,17 +6,18 @@
 "
 " poorly put together configuration file for vim
 
-" turn default file detection off
-set nocompatible
-filetype off
 
-" set runtime path to include Vundle
-" and call Vundle begin
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
-
-" let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
+"      _               _
+" __ _(_)_ __ ___ _ __| |_  _ __ _
+" \ V / | '  \___| '_ \ | || / _` |
+"  \_/|_|_|_|_|  | .__/_|\_,_\__, |
+"                |_|         |___/
+"
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 "       _           _
 "  _ __| |_  _ __ _(_)_ _  ___
@@ -24,47 +25,50 @@ Plugin 'VundleVim/Vundle.vim'
 " | .__/_|\_,_\__, |_|_||_/__/
 " |_|         |___/
 
+call plug#begin()
+
 " editorconfig plugin
-" more info: https://editorconfig.org/
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 " color themes 
-Plugin 'ayu-theme/ayu-vim'
-Plugin 'morhetz/gruvbox'
+Plug 'ayu-theme/ayu-vim'
+Plug 'morhetz/gruvbox'
 
 " time-based theme changes
-Plugin 'jonstoler/werewolf.vim'
+Plug 'jonstoler/werewolf.vim'
 
 " latex integration plugin
-Plugin 'lervag/vimtex'
+Plug 'lervag/vimtex'
 
 " official rust plugin
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 
 " status bar plugin
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " markdown plugin
-Plugin 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 
 " groovy lang plugin
 " for making build.gradle
-Plugin 'tfnico/vim-gradle'
+Plug 'tfnico/vim-gradle'
 
 " toml plugin
-Plugin 'cespare/vim-toml'
+Plug 'cespare/vim-toml'
 
 " yaml plugin
-Plugin 'mrk21/yaml-vim'
+Plug 'mrk21/yaml-vim'
 
 " file tree plugin
-Plugin 'preservim/nerdtree'
+Plug 'preservim/nerdtree'
 
 " lsp testing
-"Plugin 'prabirshrestha/vim-lsp'
-"Plugin 'mattn/vim-lsp-settings'
-"Plugin 'vim-syntastic/syntastic'
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'mattn/vim-lsp-settings'
+"Plug 'vim-syntastic/syntastic'
+
+call plug#end()
 
 "           _
 "  ___ _ __| |_
@@ -95,6 +99,9 @@ let g:werewolf_day_start = 7
 let g:werewolf_day_end = 20
 
 "############### VIM CONF ###############" 
+
+" to be safe 
+set nocompatible
 
 " turn on built-in syntax highlighting
 syntax on
@@ -149,6 +156,4 @@ nmap <C-N> :nohlsearch
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
       \ && b:NERDTree.isTabTree()) | q | endif
 
-" mandatory call to vundle
-call vundle#end()
 filetype plugin indent on
