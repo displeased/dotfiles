@@ -46,6 +46,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'enricobacis/vim-airline-clock'
 
+" distraction free writing
+Plug 'junegunn/goyo.vim'
+
 " file tree plugin
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 
@@ -86,6 +89,10 @@ call plug#end() "end plugin declarations
 filetype plugin indent on
 syntax on
 
+" disable swap file and backup
+set nobackup
+set noswapfile
+
 " disable sound in Windows Terminal
 set belloff=all
 
@@ -103,7 +110,7 @@ set background=dark
 
 " tmux specific settings
 if exists('$TMUX')
-    set ft=tmux nowrap
+    set ttymouse=xterm2
 endif
 
 " turn on mouse integration
@@ -111,9 +118,7 @@ endif
 set mouse=a
 if has("mouse_sgr")
     set ttymouse=sgr
-else
-    set ttymouse=xterm2
-end
+endif
 
 " converts tabs to spaces
 set expandtab
@@ -138,7 +143,15 @@ au FileType gitcommit setlocal tw=72
 "############### KEYBINDS ###############" 
 
 " keybind ctrl+n to turn off search highlighting
-nmap <C-N> :nohlsearch
+nmap <C-N> :nohlsearch<CR>
+
+" custom stuff that starts with ,
+let mapleader = ','
+nnoremap <leader>g :Goyo 50%<CR>
+nnoremap <leader>d :NERDTreeToggle<CR>
+
+" turn Q into valid q!
+command Q q!
 
 "############### AUTOCMD ###############" 
 
