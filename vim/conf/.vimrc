@@ -94,15 +94,17 @@ set t_Co=256
 " set true color support
 set termguicolors
 
-" configure default theme 
-colorscheme gruvbox 
-set background=dark
-
 " set ayu dark
 let ayucolor="mirage"
 
-" tmux reccomended settings
-set ft=tmux tw=0 nowrap
+" configure default theme 
+colorscheme ayu 
+set background=dark
+
+" tmux specific settings
+if exists('$TMUX')
+    set ft=tmux nowrap
+endif
 
 " turn on mouse integration
 " https://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux#550482
@@ -128,10 +130,6 @@ set textwidth=0
 " set highlighting on search
 set hlsearch
 
-" close NERDTree on last window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
-      \ && b:NERDTree.isTabTree()) | q | endif
-
 "############### FILETYPE ###############" 
 
 " set workwrap for git commit messages to 72 
@@ -141,6 +139,12 @@ au FileType gitcommit setlocal tw=72
 
 " keybind ctrl+n to turn off search highlighting
 nmap <C-N> :nohlsearch
+
+"############### AUTOCMD ###############" 
+
+" close NERDTree on last window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
+      \ && b:NERDTree.isTabTree()) | q | endif
 
 "############### SYNTASTIC ###############" 
 
