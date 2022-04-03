@@ -3,7 +3,7 @@
 " \ \ / / | '_ ` _ \| '__/ __|
 "  \ V /| | | | | | | | | (__
 "   \_/ |_|_| |_| |_|_|  \___|
-
+"
 " poorly put together configuration file for vim
 
 " turn default file detection off
@@ -28,8 +28,12 @@ Plugin 'VundleVim/Vundle.vim'
 " more info: https://editorconfig.org/
 Plugin 'editorconfig/editorconfig-vim'
 
-" ayu theme plugin
+" color themes 
 Plugin 'ayu-theme/ayu-vim'
+Plugin 'morhetz/gruvbox'
+
+" time-based theme changes
+Plugin 'jonstoler/werewolf.vim'
 
 " latex integration plugin
 Plugin 'lervag/vimtex'
@@ -68,6 +72,8 @@ Plugin 'preservim/nerdtree'
 " \___/ .__/\__|
 "     |_|
 
+"############### SYNTASTIC ###############" 
+
 " syntastic defaults
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -79,21 +85,29 @@ set statusline+=%*
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
+"############### WEREWOLF ###############" 
+let g:werewolf_day_themes = ['gruvbox']
+let g:werewolf_night_themes = ['ayu']
+
+" default 8, use 24 hour format
+let g:werewolf_day_start = 7
+" default 20, 24 hour format
+let g:werewolf_day_end = 20
+
+"############### VIM CONF ###############" 
+
 " turn on built-in syntax highlighting
 syntax on
 
 " disable sound in Windows Terminal
 set belloff=all
 
-" setup ayu theme by
-" - setting term to 256 colors
-" - setting true color support 
-" - setting the colorscheme to ayu
-" - setting the flavor of ayu to mriage
+" force 256 color terminal
 set t_Co=256
+" set true color support
 set termguicolors
 
-colorscheme ayu
+colorscheme gruvbox 
 let ayucolor="dark"
 set background=dark
 
@@ -126,7 +140,6 @@ set textwidth=0
 set hlsearch
 
 " keybind ctrl+n to turn off search highlighting
-" note: you must hit enter after ctrl+n
 nmap <C-N> :nohlsearch
 
 " open NERDTree on open
