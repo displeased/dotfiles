@@ -55,6 +55,9 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 " lsp testing
 "Plug 'vim-syntastic/syntastic'
 
+" battery in airline display
+Plug 'lambdalisue/battery.vim'
+
 "############### Syntax/Lang Plugins ###############"
 
 " markdown plugin
@@ -140,6 +143,9 @@ set hlsearch
 " set workwrap for git commit messages to 72 
 au FileType gitcommit setlocal tw=72
 
+" we want make to use real tabs
+au FileType make set noexpandtab
+
 "############### KEYBINDS ###############" 
 
 " keybind ctrl+n to turn off search highlighting
@@ -159,12 +165,17 @@ command Q q!
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
       \ && b:NERDTree.isTabTree()) | q | endif
 
+"############### BATTERY.VIM ###############" 
+
+let g:airline_extensions = [ 'battery' ]
+let g:battery#component_format = "%v%% %g"
+
 "############### SYNTASTIC ###############" 
 
 " syntastic defaults
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 " syntastic settings
 "let g:syntastic_always_populate_loc_list = 1
