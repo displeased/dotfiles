@@ -50,13 +50,13 @@ Plug 'enricobacis/vim-airline-clock'
 Plug 'junegunn/goyo.vim'
 
 " file tree plugin
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' } | Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " lsp testing
 "Plug 'vim-syntastic/syntastic'
 
 " battery in airline display
-Plug 'lambdalisue/battery.vim'
+"Plug 'lambdalisue/battery.vim'
 
 "############### Syntax/Lang Plugins ###############"
 
@@ -165,9 +165,26 @@ command Q q!
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
       \ && b:NERDTree.isTabTree()) | q | endif
 
+"############### NERDTREE GIT ###############" 
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
+let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+
 "############### BATTERY.VIM ###############" 
 
-let g:airline_extensions = [ 'battery' ]
+"let g:airline_extensions = [ 'battery' ]
 let g:battery#component_format = "%v%% %g"
 
 "############### SYNTASTIC ###############" 
