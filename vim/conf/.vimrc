@@ -50,7 +50,7 @@ Plug 'enricobacis/vim-airline-clock'
 Plug 'junegunn/goyo.vim'
 
 " file tree plugin
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' } | Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " lsp testing
 "Plug 'vim-syntastic/syntastic'
@@ -114,6 +114,7 @@ set background=dark
 " tmux specific settings
 if exists('$TMUX')
     set ttymouse=xterm2
+    set nowrap
 endif
 
 " turn on mouse integration
@@ -141,7 +142,10 @@ set hlsearch
 "############### FILETYPE ###############" 
 
 " set workwrap for git commit messages to 72 
-au FileType gitcommit setlocal tw=72
+au FileType gitcommit setlocal tw=72 spell
+
+" we want 80 columns on markdown files
+au FileType markdown setlocal tw=80
 
 " we want make to use real tabs
 au FileType make set noexpandtab
@@ -155,6 +159,7 @@ nmap <C-N> :nohlsearch<CR>
 let mapleader = ','
 nnoremap <leader>g :Goyo 50%<CR>
 nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <leader>s :setlocal spell! spelllang=en_us<CR>
 
 " turn Q into valid q!
 command Q q!
@@ -164,23 +169,6 @@ command Q q!
 " close NERDTree on last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
       \ && b:NERDTree.isTabTree()) | q | endif
-
-"############### NERDTREE GIT ###############" 
-
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
-
-let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 
 "############### BATTERY.VIM ###############" 
 
