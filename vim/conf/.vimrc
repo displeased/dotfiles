@@ -36,7 +36,6 @@ Plug 'editorconfig/editorconfig-vim'
 
 " color themes 
 Plug 'ayu-theme/ayu-vim'
-Plug 'morhetz/gruvbox'
 
 " time-based theme changes
 Plug 'displeased/vim-circadian'
@@ -51,12 +50,6 @@ Plug 'junegunn/goyo.vim'
 
 " file tree plugin
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-
-" lsp testing
-"Plug 'vim-syntastic/syntastic'
-
-" battery in airline display
-"Plug 'lambdalisue/battery.vim'
 
 "############### Syntax/Lang Plugins ###############"
 
@@ -150,6 +143,9 @@ au FileType markdown setlocal tw=80
 " we want make to use real tabs
 au FileType make set noexpandtab
 
+" custom filetype for bats testing framework
+autocmd BufNewFile,BufRead *.bats set syn=bash ft=bash
+
 "############### KEYBINDS ###############" 
 
 " keybind ctrl+n to turn off search highlighting
@@ -169,24 +165,6 @@ command Q q!
 " close NERDTree on last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
       \ && b:NERDTree.isTabTree()) | q | endif
-
-"############### BATTERY.VIM ###############" 
-
-"let g:airline_extensions = [ 'battery' ]
-let g:battery#component_format = "%v%% %g"
-
-"############### SYNTASTIC ###############" 
-
-" syntastic defaults
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-" syntastic settings
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
 
 "############### CIRCADIAN ###############" 
 
