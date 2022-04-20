@@ -144,7 +144,7 @@ au FileType markdown setlocal tw=80
 au FileType make set noexpandtab
 
 " custom filetype for bats testing framework
-autocmd BufNewFile,BufRead *.bats set syn=bash ft=bash
+au BufNewFile,BufRead *.bats set syn=bash ft=bash
 
 "############### KEYBINDS ###############" 
 
