@@ -41,9 +41,7 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'displeased/vim-circadian'
 
 " status bar plugin
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'enricobacis/vim-airline-clock'
+Plug 'itchyny/lightline.vim'
 
 " distraction free writing
 Plug 'junegunn/goyo.vim'
@@ -51,25 +49,19 @@ Plug 'junegunn/goyo.vim'
 " file tree plugin
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 
+" better startup screen
+Plug 'mhinz/vim-startify'
+
 "############### Syntax/Lang Plugins ###############"
 
-" markdown plugin
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-
-" groovy lang plugin
-Plug 'tfnico/vim-gradle', { 'for': 'gradle' }
-
-" rust lang plugin
+" rust lang plugin (adds cargo support)
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
-" toml plugin
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-
-" yaml plugin
-Plug 'mrk21/yaml-vim', { 'for': 'yaml' }
 
 " latex integration plugin
 Plug 'lervag/vimtex', { 'for': 'tex' }
+
+" plugin for multiple filetypes
+Plug 'sheerun/vim-polyglot'
 
 call plug#end() "end plugin declarations
 
@@ -174,5 +166,30 @@ let g:circadian_night_start = 20
 let g:circadian_day_theme = 'ayu'
 let g:circadian_night_theme = 'ayu'
 
-let g:circadian_day_cmds = "let g:ayucolor='mirage'"
-let g:circadian_night_cmds= "let g:ayucolor='dark'"
+let g:circadian_day_cmds = "let g:ayucolor = 'mirage' | let g:lightline.colorscheme = 'ayu_mirage'"
+let g:circadian_night_cmds = "let g:ayucolor = 'dark' | let g:lightline.colorscheme = 'ayu_dark'"
+
+"############### STARTIFY ###############" 
+
+let s:ascii_header = [ 
+        \ '        _             ',
+        \ ' __   _(_)_ __ ___    ',
+        \ ' \ \ / / | ''_ ` _ \  ',
+        \ '  \ V /| | | | | | |  ',
+        \ '   \_/ |_|_| |_| |_|  ',
+        \ '                      ',
+        \ '   the text editor    ',
+        \ ]
+let g:startify_custom_header =
+            \ startify#center(s:ascii_header)
+
+"############### LIGHTLINE ###############" 
+
+" configure layout of components 
+let g:lightline = {
+      \ 'colorscheme': 'ayu_mirage',
+      \ 'active': {
+      \   'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ]],
+      \   'right': [[ 'filetype', 'percent', 'lineinfo' ]]
+      \ }
+      \ }
