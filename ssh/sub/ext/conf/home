@@ -6,10 +6,6 @@ Host git
     Hostname home.displeased.me
     Port 38573
 
-Host workstation
-    Hostname home.displeased.me
-    Port 38574
-
 Host raspi
     Hostname home.displeased.me
     Port 38582
