@@ -139,6 +139,8 @@ au FileType make set noexpandtab
 " custom filetype for bats testing framework
 au BufNewFile,BufRead *.bats set syn=bash ft=bash
 
+au BufNewFile,BufRead */.ssh/config.d/* set syn=sshconfig ft=sshconfig
+
 "############### KEYBINDS ###############" 
 
 " keybind ctrl+n to turn off search highlighting
@@ -146,6 +148,7 @@ nmap <C-N> :nohlsearch<CR>
 
 " custom stuff that starts with ,
 let mapleader = ','
+nnoremap <leader>q :bd<CR>
 nnoremap <leader>g :Goyo 50%<CR>
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>s :setlocal spell! spelllang=en_us<CR>
@@ -205,10 +208,25 @@ let g:lightline = {
       \ },
       \ }
 
+"############### LIGHTLINE BUFF ###############"
+
 " show tabline for lightline buffer
 set showtabline=2
 
-"############### LIGHTLINE BUFF ###############"
+" show ordinal numbers for tabs
+"let g:lightline#bufferline#show_number = 2
+
+" disable unicode symbols for a more basic look
+let g:lightline#bufferline#unicode_symbols = 0
+
+" only show the filename and not the path
+let g:lightline#bufferline#filename_modifier = ':t'
+
+" set bufferline component raw (needed for clickable-ness)
+let g:lightline.component_raw = {'buffers': 1}
+
+" allow clickable bufferline 
+let g:lightline#bufferline#clickable = 1
 
 " remap keys to switch and close buffers
 nmap <Leader>1 <Plug>lightline#bufferline#go(1)
