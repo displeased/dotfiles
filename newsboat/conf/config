@@ -62,4 +62,4 @@ highlight article ":.*\\(link\\)$" green default
 highlight article ":.*\\(image\\)$" blue default
 highlight article ":.*\\(embedded flash\\)$" magenta default
 
-browser "~/.local/bin/newsboat-browser.sh"
+browser "/usr/bin/env newsboat-browser"
