@@ -8,7 +8,7 @@
 --color=always
 
 # set the theme to gruvbox
---theme ansi 
+--theme gruvbox 
 
 # no line numbers
 -p
