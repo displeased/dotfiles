@@ -72,7 +72,7 @@ alias hvim='vim -c "%!xxd" -c "set ft=xxd"'
 # additional functions/more complicated intrinsic aliasing 
 
 # convert every non-dotfile in the directory to unix
-dirtounix() { for f in *; do dos2unix "$f"; done }
+dirtounix() { if [ -n "$(command -v dos2unix)" ]; then { for f in *; do dos2unix "$f"; done; }; else { return 1; }; fi }
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"

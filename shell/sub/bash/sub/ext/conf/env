@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# XDG variables
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
 #     _
 #  __| |_____ __
 # / _` / -_) V /
@@ -7,23 +13,69 @@
 #
 # environment variables for development
 
-# include rustup env file if installed
-if [ -f ~/.cargo/bin/rustup ]; then
-    . "$HOME/.cargo/env"
-fi
+#### Python
 
-# include go bin directory if it exists
+# set custom startup script (that disables python history)
+PYTHONSTARTUP="$XDG_CONFIG_HOME"'/python/pythonrc'
+export PYTHONSTARTUP
+
+#### Rustup & Cargo
+
+# default cargo install location
+D_CARGO_HOME="$HOME"'/.cargo'
+
+# if the default isn't already installed we can setup
+# our own definitions for how it should be installed
+if ! [ -d "$D_CARGO_HOME" ]; then
+    # define install locations of cargo and rustup
+    CARGO_HOME="$XDG_DATA_HOME"'/cargo'
+    RUSTUP_HOME="$XDG_DATA_HOME"'/rustup'
+    export CARGO_HOME
+    export RUSTUP_HOME
+
+    # include environment definitions
+    [ -d "$CARGO_HOME" ] && { . "$CARGO_HOME"'/env'; }
+else
+    # include environment definitions
+    [ -d "$D_CARGO_HOME" ] && { . "$D_CARGO_HOME"'/env'; }
+fi
+unset D_CARGO_HOME
+
+#### Go
+
+# default go install location
+D_GOPATH="$HOME"'/go'
+
+# only make environment changes if go
+# is currently installed
 if [ -n "$(command -v go)" ]; then
-    GOPATH="$(go env GOPATH)"
+    # if go already stores files don't change
+    # the GOPATH location and just add to PATH
+    if [ -d "$D_GOPATH" ]; then
+        GOPATH="$D_GOPATH"
+    else
+        GOPATH="$XDG_DATA_HOME"'/go'
+    fi
+    
+    # add bin directory to path
     PATH="$GOPATH/bin:$PATH"
+
     export GOPATH
     export PATH
 fi
 
-# automatic JAVA_HOME variable evaluation
+unset D_GOPATH
+
+#### Java
+
 if [ -n "$(command -v java)" ]; then
+    # dynamically evaluate java home of current java version
     JAVA_HOME="$(realpath "$(dirname "$(realpath "$(which java)")")""/..")"
     export JAVA_HOME
+
+    # change java configuration path to standard .config directory
+    _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+    export _JAVA_OPTIONS
 fi
 
 #      _
@@ -33,28 +85,39 @@ fi
 #
 # etc. environment variables - typically for shared use
 
-# set default editor
+#### Editor - set the default editor
+
 if [ -n "$(command -v vim)" ]; then
-    export EDITOR='vim'
+    EDITOR='vim'
 else
-    export EDITOR='vi'
+    EDITOR='vi'
 fi
+export EDITOR
+
+#### Pager - set the default file reader
 
 # configure pager settings with less as a
 # fallback if bat doesn't exist
 if [ -z "$(command -v bat)" ]; then
     alias bat='less'
-    export PAGER='less'
+    PAGER='less'
 else
-    export PAGER='bat'
+    PAGER='bat'
 fi
+export PAGER
 
-# set default web browser to firefox
+#### Browser - set the system browser
+
+# set default web browser to firefox with
+# lynx as a backup option
 if [ -n "$(command -v firefox)" ]; then
-    export BROWSER='firefox'
+    BROWSER='firefox'
 else
-    export BROWSER='lynx'
+    BROWSER='lynx'
 fi
+export BROWSER
+
+#### Tree - map exa with args to tree
 
 # prefer exa to tree if installed
 if [ -n "$(command -v exa)" ]; then
@@ -68,7 +131,7 @@ fi
 #
 # environment variables for program configuration
 
-# configuration variables for bash itself - see bash(1) for more options
+#### Bash Conf
 
 # don't put duplicate lines or space lines in the history
 HISTCONTROL=ignoreboth 
@@ -93,8 +156,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# configurations for the standard pager less - see less(1) for more options
+#### Less Conf
 
 # https://relentlesscoding.com/posts/make-less-options-permanent-or-the-missing-lessrc/
 export LESS="--mouse IFRSX" # add mouse support
 export LESSHISTFILE='-' # remove history file
+
+#### Cuda Conf
+
+# change the path of the cache file
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"'/nv'
+
+#### Readline Conf 
+
+# change the path of the configuration to $HOME/.config/readline/inputrc
+export INPUTRC="$XDG_CONFIG_HOME"'/readline/inputrc'
