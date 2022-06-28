@@ -33,7 +33,7 @@ alias sl=ls
 #
 # reassignment of commands that make more sense
 
-alias yarn=yarnpkg
+alias yarn="yarnpkg"
 
 #               _
 #  __ ___ _ __ | |__  ___ ___
@@ -78,6 +78,9 @@ alias hvim='vim -c "%!xxd" -c "set ft=xxd"'
 # |_|_|_\__,_\__|_| \___/__/
 #
 # additional functions/more complicated intrinsic aliasing 
+
+# source .bashrc again
+re-bash() { source ~/.bashrc; }
 
 # tmux attach to session
 tat() { tmux attach -t "$1"; }

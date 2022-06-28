@@ -133,6 +133,9 @@ fi
 
 #### Bash Conf
 
+# put history file in correct XDG location
+HISTFILE="$XDG_STATE_HOME/bash/history"
+
 # don't put duplicate lines or space lines in the history
 HISTCONTROL=ignoreboth 
 
