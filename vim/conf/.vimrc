@@ -144,16 +144,17 @@ nnoremap <silent> g* g*zz
 au FileType gitcommit setlocal tw=72 spell
 
 " word wrap on 80 chars for markdown
-au FileType markdown setlocal tw=80
+au BufNewFile,BufRead *.md,*.markdown setlocal ft=markdown
+au FileType markdown setlocal tw=80 spell
 
 " we want make to use real tabs for makefiles
-au FileType make set noexpandtab
+au FileType make setlocal noexpandtab
 
 " custom filetype for bats testing framework
-au BufNewFile,BufRead *.bats set syn=bash ft=bash
+au BufNewFile,BufRead *.bats setlocal syn=bash ft=bash
 
 " syntax highlight items in ~/.ssh/config.d/* as ssh configs
-au BufNewFile,BufRead */.ssh/config.d/* set syn=sshconfig ft=sshconfig
+au BufNewFile,BufRead */.ssh/config.d/* setlocal syn=sshconfig ft=sshconfig
 
 "############################## Keybinds ##############################
 
@@ -184,7 +185,7 @@ nnoremap <leader>q :bd!<CR>
 " <leader>; to list buffers
 nmap <leader>; :buffers<CR>
 
-" new file adjacent to current buffer 
+" new file adjacent to current buffer
 nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " <leader>w to quicksave
