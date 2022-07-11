@@ -1,11 +1,15 @@
-Host home
-    Hostname home.displeased.me
-    Port 38572
-
-Host git
-    Hostname home.displeased.me
-    Port 38573
-
 Host raspi
     Hostname home.displeased.me
     Port 38582
+
+Host raspia
+    Hostname 192.168.1.15
+    ProxyJump raspi
+
+Host raspib
+    Hostname 192.168.1.10
+    ProxyJump raspi
+
+Host raspic
+    Hostname 192.168.1.5
+    ProxyJump raspi
