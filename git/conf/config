@@ -23,6 +23,7 @@
     last = log -1 HEAD
     cl = log -p -- ':(exclude)Cargo.lock'
     f = push --force-with-lease
+    guo = remote get-url origin
     pom = push origin master
     dc = diff --cached
 [pull]
@@ -42,7 +43,7 @@
 [difftool]
     prompt = false
 [diff]
-	tool = vimdiff 
+	tool = vimdiff
     algorithm = patience
     compactionHeuristic = true
 [push]
